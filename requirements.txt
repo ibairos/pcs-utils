@@ -1,4 +1,4 @@
-PyVirtualDisplay>=2.1
+PyVirtualDisplay>=2.2
 selenium>=3.141.0
 xvfbwrapper>=0.2.9
 

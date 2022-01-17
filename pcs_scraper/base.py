@@ -2,7 +2,7 @@ from pyvirtualdisplay import Display
 from selenium import webdriver
 import os
 
-from utils import Logger
+from pcs_scraper.utils import Logger
 
 
 def init_driver(logger: Logger) -> webdriver:

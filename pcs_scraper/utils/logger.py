@@ -4,8 +4,12 @@ import sys
 
 
 class Logger(object):
-    def __init__(self, folder='/tmp', name='PZ'):
-        logging.basicConfig(filename=os.path.join(folder, name + '.log'),
+    def __init__(self, folder='logs', name='pcs_scraper'):
+        log_folder = os.path.abspath(folder)
+        if not os.path.exists(log_folder):
+            os.makedirs(log_folder)
+        log_filename = os.path.join(log_folder, name + '.log')
+        logging.basicConfig(filename=log_filename,
                             filemode='a',
                             format='%(asctime)s - %(levelname)s - %(message)s',
                             level=logging.DEBUG)

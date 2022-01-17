@@ -110,3 +110,6 @@ pyvenv.cfg
 
 # Chromedriver
 chromedriver
+
+# Logs
+logs/
