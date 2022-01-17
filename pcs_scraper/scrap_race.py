@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 
-from pcs_scraper.utils import Logger
 from .base import init_driver
 from selenium import webdriver
 
@@ -8,10 +7,10 @@ BASE_URL: str = "https://www.procyclingstats.com/race/{args}"
 STAGE_URL: str = BASE_URL.format(args="{race_name}/{year}/stage-{stage}")
 STAGE_GC_URL: str = BASE_URL.format(args="{race_name}/{year}/stage-{stage}-gc")
 FINAL_GC_URL: str = BASE_URL.format(args="{race_name}/{year}/gc")
-FINAL_POINTS_URL: str = BASE_URL.format(args="{race_name}/{year}/points")
-FINAL_KOM_URL: str = BASE_URL.format(args="{race_name}/{year}/kom")
-FINAL_YOUTH_URL: str = BASE_URL.format(args="{race_name}/{year}/youth")
-FINAL_TEAMS_URL: str = BASE_URL.format(args="{race_name}/{year}/teams")
+FINAL_POINTS_URL: str = BASE_URL.format(args="{race_name}/{year}/stage-21-points")
+FINAL_KOM_URL: str = BASE_URL.format(args="{race_name}/{year}/stage-21-kom")
+FINAL_YOUTH_URL: str = BASE_URL.format(args="{race_name}/{year}/stage-21-youth")
+FINAL_TEAMS_URL: str = BASE_URL.format(args="{race_name}/{year}/stage-21-teams")
 
 STAGE_LEN = 20
 STAGE_GC_LEN = 6
@@ -21,12 +20,10 @@ FINAL_KOM_LEN = 1
 FINAL_YOUTH_LEN = 1
 FINAL_TEAMS_LEN = 1
 
-LOGGER = Logger()
-
 
 def scrap_items(url: str, results_len: int) -> list:
     # Initialize driver
-    driver: webdriver = init_driver(LOGGER)
+    driver: webdriver = init_driver()
     # Get url
     driver.get(url)
     # Get results

@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 
-from pcs_scraper.utils import Logger
 from .base import init_driver
 from selenium import webdriver
 
@@ -9,8 +8,7 @@ TEAMS_BY_YEAR_URL: str = BASE_URL.format(args="year={year}")
 
 
 def scrap_teams_by_year(year: int) -> list:
-    logger = Logger()
-    driver: webdriver = init_driver(logger)
+    driver: webdriver = init_driver()
 
     url = TEAMS_BY_YEAR_URL.format(year=year)
     driver.get(url)
