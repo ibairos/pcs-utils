@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
 
 from .base import init_driver
 from selenium import webdriver
@@ -47,8 +48,11 @@ def scrap_teams_by_year(year: int) -> list:
     for team in teams:
         for rider in team['riders']:
             driver.get(rider['link'])
-            rider['img'] = driver.find_element(By.XPATH, "//div[contains(@class, 'rdr-img-cont')]") \
-                .find_element(By.XPATH, ".//img").get_attribute('src')
+            try:
+                rider['img'] = driver.find_element(By.XPATH, "//div[contains(@class, 'rdr-img-cont')]") \
+                    .find_element(By.XPATH, ".//img").get_attribute('src')
+            except NoSuchElementException:
+                print("Could not find img for '" + rider["preferred_name"] + "' in '" + rider["link"] + "'")
             rider['country'] = driver.find_element(By.XPATH, "//div[contains(@class, 'rdr-info-cont')]") \
                 .find_element(By.XPATH, ".//a[contains(@class, 'black')]").get_attribute('innerHTML')
 
