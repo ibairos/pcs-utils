@@ -31,9 +31,13 @@ def scrap_teams_by_year(year: int) -> list:
     # Get the img and the riders from each team
     for team in teams:
         driver.get(team['link'])
-        for infolist_element in driver.find_elements(By.XPATH, "//ul[contains(@class, 'infolist')]"):
-            if infolist_element.text == 'Shirt:':
-                team['img'] = infolist_element.find_element(By.XPATH, ".//img").get_attribute('src')
+        team_img_candidates = driver.find_elements(By.XPATH, "//ul[contains(@class, 'infolist')]")
+        if len(team_img_candidates) == 1:
+            team['img'] = team_img_candidates[0].find_element(By.XPATH, ".//img").get_attribute('src')
+        else:
+            for infolist_element in team_img_candidates:
+                if 'Shirt:' in infolist_element.text:
+                    team['img'] = infolist_element.find_element(By.XPATH, ".//img").get_attribute('src')
 
         riders = driver.find_element(By.XPATH, "//ul[contains(@class, 'list') and contains(@class, 'pad2')]") \
             .find_elements(By.XPATH, ".//li")
