@@ -1,7 +1,9 @@
+import json
+
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 from .base import init_driver
-from selenium import webdriver
 
 BASE_URL: str = "https://www.procyclingstats.com/race/{args}"
 STAGE_URL: str = BASE_URL.format(args="{race_name}/{year}/stage-{stage}")
@@ -13,6 +15,7 @@ FINAL_YOUTH_URL: str = BASE_URL.format(args="{race_name}/{year}/stage-21-youth")
 FINAL_TEAMS_URL: str = BASE_URL.format(args="{race_name}/{year}/stage-21-teams")
 
 STAGE_LEN = 20
+STAGE_TTT_LEN = 3
 STAGE_GC_LEN = 6
 FINAL_GC_LEN = 30
 FINAL_POINTS_LEN = 1
@@ -22,11 +25,8 @@ FINAL_TEAMS_LEN = 1
 
 
 def scrap_items(url: str, results_len: int) -> list:
-    # Initialize driver
     driver: webdriver = init_driver()
-    # Get url
     driver.get(url)
-    # Get results
     result_items = driver.find_element(By.XPATH,
                                        "//div[contains(@class, 'result-cont') and not(contains(@class, 'hide'))]") \
         .find_element(By.XPATH, ".//table[contains(@class, 'basic') and contains(@class, 'results')]") \
@@ -41,12 +41,46 @@ def scrap_items(url: str, results_len: int) -> list:
         })
     # Close the driver
     driver.close()
+    print("Results scraped. Webdriver closed!")
+    return results
+
+
+def scrap_items_ttt(url: str, team_results_len: int) -> list:
+    driver: webdriver = init_driver()
+    driver.get(url)
+    result_items = driver.find_element(By.XPATH,
+                                       "//div[contains(@class, 'result-cont') and not(contains(@class, 'hide'))]") \
+        .find_element(By.XPATH, ".//table[contains(@class, 'results-ttt')]") \
+        .find_element(By.XPATH, ".//tbody").find_elements(By.XPATH, ".//tr")
+    results = list()
+    team_position = 0
+    for item in result_items:
+        if 'team' in item.get_attribute('class').split():
+            if team_position >= team_results_len:
+                break
+            else:
+                team_position += 1
+                pass
+        result_element = item.find_element(By.XPATH, ".//a")
+        results.append({
+            "name": result_element.get_attribute("innerHTML"),
+            "link": result_element.get_attribute("href"),
+            "position": team_position
+        })
+    # Close the driver
+    driver.close()
+    print("Results scraped. Webdriver closed!")
     return results
 
 
 def scrap_stage(race_name: str, year: int, stage: int) -> list:
     stage_url = STAGE_URL.format(race_name=race_name, year=year, stage=stage)
     return scrap_items(stage_url, STAGE_LEN)
+
+
+def scrap_stage_ttt(race_name: str, year: int, stage: int) -> list:
+    stage_url = STAGE_URL.format(race_name=race_name, year=year, stage=stage)
+    return scrap_items_ttt(stage_url, STAGE_TTT_LEN)
 
 
 def scrap_stage_gc(race_name: str, year: int, stage: int) -> list:

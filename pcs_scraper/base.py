@@ -4,9 +4,9 @@ import os
 
 
 def init_driver() -> webdriver:
-    # Create a display
+    print("Initializing Webdriver...")
     if 'MAC' not in os.environ:
-        display = Display(visible=0, size=(1200, 1200))
+        display = Display(visible=False, size=(1200, 1200))
         display.start()
 
     # Create a new Chrome session
@@ -25,4 +25,5 @@ def init_driver() -> webdriver:
     driver.implicitly_wait(30)
     driver.maximize_window()
 
+    print("Webdriver initialized!")
     return driver
