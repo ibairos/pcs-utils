@@ -1,5 +1,3 @@
-import json
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
@@ -73,41 +71,41 @@ def scrap_items_ttt(url: str, team_results_len: int) -> list:
     return results
 
 
-def scrap_stage(race_name: str, year: int, stage: int) -> list:
+def scrap_stage(race_name: str, year: int, stage: int, length: int = STAGE_LEN) -> list:
     stage_url = STAGE_URL.format(race_name=race_name, year=year, stage=stage)
-    return scrap_items(stage_url, STAGE_LEN)
+    return scrap_items(stage_url, length)
 
 
-def scrap_stage_ttt(race_name: str, year: int, stage: int) -> list:
+def scrap_stage_ttt(race_name: str, year: int, stage: int, length: int = STAGE_TTT_LEN) -> list:
     stage_url = STAGE_URL.format(race_name=race_name, year=year, stage=stage)
-    return scrap_items_ttt(stage_url, STAGE_TTT_LEN)
+    return scrap_items_ttt(stage_url, length)
 
 
-def scrap_stage_gc(race_name: str, year: int, stage: int) -> list:
+def scrap_stage_gc(race_name: str, year: int, stage: int, length: int = STAGE_GC_LEN) -> list:
     stage_gc_url = STAGE_GC_URL.format(race_name=race_name, year=year, stage=stage)
-    return scrap_items(stage_gc_url, STAGE_LEN)
+    return scrap_items(stage_gc_url, length)
 
 
-def scrap_final_gc(race_name: str, year: int) -> list:
+def scrap_final_gc(race_name: str, year: int, length: int = FINAL_GC_LEN) -> list:
     final_gc_url = FINAL_GC_URL.format(race_name=race_name, year=year)
-    return scrap_items(final_gc_url, STAGE_LEN)
+    return scrap_items(final_gc_url, length)
 
 
-def scrap_final_points(race_name: str, year: int) -> list:
+def scrap_final_points(race_name: str, year: int, length: int = FINAL_POINTS_LEN) -> list:
     final_points_url = FINAL_POINTS_URL.format(race_name=race_name, year=year)
-    return scrap_items(final_points_url, STAGE_LEN)
+    return scrap_items(final_points_url, length)
 
 
-def scrap_final_kom(race_name: str, year: int) -> list:
+def scrap_final_kom(race_name: str, year: int, length: int = FINAL_KOM_LEN) -> list:
     final_kom_url = FINAL_KOM_URL.format(race_name=race_name, year=year)
-    return scrap_items(final_kom_url, STAGE_LEN)
+    return scrap_items(final_kom_url, length)
 
 
-def scrap_final_youth(race_name: str, year: int) -> list:
+def scrap_final_youth(race_name: str, year: int, length: int = FINAL_YOUTH_LEN) -> list:
     final_youth_url = FINAL_YOUTH_URL.format(race_name=race_name, year=year)
-    return scrap_items(final_youth_url, STAGE_LEN)
+    return scrap_items(final_youth_url, length)
 
 
-def scrap_final_teams(race_name: str, year: int) -> list:
+def scrap_final_teams(race_name: str, year: int, length: int = FINAL_TEAMS_LEN) -> list:
     final_teams_url = FINAL_YOUTH_URL.format(race_name=race_name, year=year)
-    return scrap_items(final_teams_url, STAGE_LEN)
+    return scrap_items(final_teams_url, length)
