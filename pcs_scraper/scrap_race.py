@@ -15,7 +15,7 @@ FINAL_TEAMS_URL: str = BASE_URL.format(args="{race_name}/{year}/stage-21-teams")
 STAGE_LEN = 20
 STAGE_TTT_LEN = 3
 STAGE_GC_LEN = 6
-FINAL_GC_LEN = 30
+FINAL_GC_LEN = 25
 FINAL_POINTS_LEN = 1
 FINAL_KOM_LEN = 1
 FINAL_YOUTH_LEN = 1
@@ -107,5 +107,5 @@ def scrap_final_youth(race_name: str, year: int, length: int = FINAL_YOUTH_LEN) 
 
 
 def scrap_final_teams(race_name: str, year: int, length: int = FINAL_TEAMS_LEN) -> list:
-    final_teams_url = FINAL_YOUTH_URL.format(race_name=race_name, year=year)
+    final_teams_url = FINAL_TEAMS_URL.format(race_name=race_name, year=year)
     return scrap_items(final_teams_url, length)

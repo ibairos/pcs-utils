@@ -34,3 +34,7 @@ pcs_scraper.scrap_final_kom('tour-de-france', 2021)
 pcs_scraper.scrap_final_youth('tour-de-france', 2021)
 pcs_scraper.scrap_final_teams('tour-de-france', 2021)
 ```
+
+### Publishing to PyPy
+
+https://packaging.python.org/en/latest/tutorials/packaging-projects/
