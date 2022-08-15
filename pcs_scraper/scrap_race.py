@@ -7,10 +7,10 @@ BASE_URL: str = "https://www.procyclingstats.com/race/{args}"
 STAGE_URL: str = BASE_URL.format(args="{race_name}/{year}/stage-{stage}")
 STAGE_GC_URL: str = BASE_URL.format(args="{race_name}/{year}/stage-{stage}-gc")
 FINAL_GC_URL: str = BASE_URL.format(args="{race_name}/{year}/gc")
-FINAL_POINTS_URL: str = BASE_URL.format(args="{race_name}/{year}/stage-21-points")
-FINAL_KOM_URL: str = BASE_URL.format(args="{race_name}/{year}/stage-21-kom")
-FINAL_YOUTH_URL: str = BASE_URL.format(args="{race_name}/{year}/stage-21-youth")
-FINAL_TEAMS_URL: str = BASE_URL.format(args="{race_name}/{year}/stage-21-teams")
+FINAL_POINTS_URL: str = BASE_URL.format(args="{race_name}/{year}/points")
+FINAL_KOM_URL: str = BASE_URL.format(args="{race_name}/{year}/kom")
+FINAL_YOUTH_URL: str = BASE_URL.format(args="{race_name}/{year}/youth")
+FINAL_TEAMS_URL: str = BASE_URL.format(args="{race_name}/{year}/teams")
 
 STAGE_LEN = 20
 STAGE_TTT_LEN = 3
